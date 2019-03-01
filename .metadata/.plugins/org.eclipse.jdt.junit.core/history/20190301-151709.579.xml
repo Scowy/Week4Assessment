@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ParameterizedExcel" project="SeleniumAssessment" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.qa.SeleniumPackage.ParameterizedExcel" time="27.124">
+    <testsuite name="[0]" time="10.317">
+      <testcase name="testingExcel[0]" classname="com.qa.SeleniumPackage.ParameterizedExcel" time="10.317"/>
+    </testsuite>
+    <testsuite name="[1]" time="8.594">
+      <testcase name="testingExcel[1]" classname="com.qa.SeleniumPackage.ParameterizedExcel" time="8.594"/>
+    </testsuite>
+    <testsuite name="[2]" time="8.213">
+      <testcase name="testingExcel[2]" classname="com.qa.SeleniumPackage.ParameterizedExcel" time="8.213"/>
+    </testsuite>
+  </testsuite>
+</testrun>

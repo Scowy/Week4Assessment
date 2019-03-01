@@ -1,0 +1,92 @@
+package com.qa.SeleniumPackage;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+
+import cucumber.api.java.Before;
+
+@RunWith(Parameterized.class)
+public class ParameterizedExcel {
+
+	@Parameters
+	public static Collection<Object[]> data() throws IOException {
+
+		FileInputStream file = new FileInputStream("C:\\Users\\Admin\\Desktop\\ExcelTesting\\DemoSiteDDT.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheetAt(0);
+
+		Object[][] ob = new Object[sheet.getPhysicalNumberOfRows()][5];
+
+		for (int row = 0; row < sheet.getPhysicalNumberOfRows(); row++) {
+
+			for (int column = 0; column < 5; column++) {
+				if(row != 0) {
+					ob[row - 1][column] = sheet.getRow(row).getCell(column).getStringCellValue();
+				}
+			}
+		}
+		return Arrays.asList(ob);
+	}
+
+	private String username;
+	private String password;
+	private String confirmPassword;
+	private String fullname;
+	private String email;
+
+	public ParameterizedExcel(String username, String password, String confirmPassword, String fullname, String email) {
+
+		this.username = username;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.fullname = fullname;
+		this.email = email;
+	}
+
+	ChromeDriver driver;
+
+	@Before
+	public void setup() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\Assessment\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get(Constants.URLLOGIN);
+	}
+	
+	@After
+	public void teardown() {
+		driver.quit();
+	}
+	
+	@Test
+	public void testingExcel() {
+		
+		JenkinsLogin jenkLog = PageFactory.initElements(driver, JenkinsLogin.class);
+		jenkLog.login();
+		JenkinsMainPage jenkHome = PageFactory.initElements(driver, JenkinsMainPage.class);
+		jenkHome.manageJenkins();
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.PAGE_DOWN);
+		JenkinsManagerPage jenkManager = PageFactory.initElements(driver, JenkinsManagerPage.class);
+		jenkManager.manageUsers();
+		JenkinsUserPage jenkUserPage = PageFactory.initElements(driver, JenkinsUserPage.class);
+		jenkUserPage.addUser();
+		JenkinsCreatingUserPage jenkinsUserMaker = PageFactory.initElements(driver, JenkinsCreatingUserPage.class);
+		jenkinsUserMaker.createUser(username, password, confirmPassword, fullname, email);
+	}
+
+}

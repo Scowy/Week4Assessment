@@ -1,0 +1,35 @@
+package com.qa.SeleniumPackage;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class JenkinsCreatingUserPage {
+
+	@FindBy(name = "username")
+	private WebElement usernameInput;
+
+	@FindBy(name = "password1")
+	private WebElement passwordInput;
+
+	@FindBy(name = "password2")
+	private WebElement confirmPasswordInput;
+
+	@FindBy(name = "fullname")
+	private WebElement fullNameInput;
+
+	@FindBy(name = "email")
+	private WebElement emailInput;
+
+	@FindBy(id = "yui-gen1-button")
+	private WebElement createButton;
+
+	public void createUser(String username, String password, String confirmPassword, String fullname, String email) {
+		usernameInput.sendKeys(username);
+		passwordInput.sendKeys(password);
+		confirmPasswordInput.sendKeys(confirmPassword);
+		fullNameInput.sendKeys(fullname);
+		emailInput.sendKeys(email);
+		createButton.click();
+	}
+
+}

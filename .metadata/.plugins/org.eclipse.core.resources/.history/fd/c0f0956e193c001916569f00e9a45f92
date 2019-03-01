@@ -1,0 +1,21 @@
+package com.qa.SeleniumPackage;
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class JenkinsTest {
+	
+	ChromeDriver driver;
+
+	@Before
+	public void setup() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\Assessment\\chromedriver.exe");
+	}
+	
+	@After
+	public void teardown() {
+		driver.quit();
+	}
+	
+	
+}

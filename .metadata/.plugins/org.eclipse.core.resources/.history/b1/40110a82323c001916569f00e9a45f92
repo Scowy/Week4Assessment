@@ -1,0 +1,39 @@
+package com.qa.SeleniumPackage;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class JenkinsCreatingUserPage {
+
+	@FindBy(xpath = "//*[@id=\"username\"]")
+	private WebElement usernameInput;
+
+	@FindBy(xpath = "//*[@id=\"username\"]")
+	private WebElement passwordInput;
+
+	@FindBy(xpath = "//*[@id=\"username\"]")
+	private WebElement confirmPasswordInput;
+
+	@FindBy(xpath = "//*[@id=\"username\"]")
+	private WebElement fullNameInput;
+
+	@FindBy(xpath = "//*[@id=\"username\"]")
+	private WebElement emailInput;
+
+	@FindBy(xpath = "//*[@id=\"yui-gen1-button\"]")
+	private WebElement createButton;
+
+	public void createUser(String username, String password, String confirmPassword, String fullname, String email) throws InterruptedException {
+		usernameInput.sendKeys(username);
+		Thread.sleep(1000);
+		passwordInput.sendKeys(password);
+		Thread.sleep(1000);
+		confirmPasswordInput.sendKeys(confirmPassword);
+		Thread.sleep(1000);
+		fullNameInput.sendKeys(fullname);
+		Thread.sleep(1000);
+		emailInput.sendKeys(email);
+		createButton.click();
+	}
+
+}
